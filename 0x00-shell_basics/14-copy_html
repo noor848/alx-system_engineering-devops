@@ -1,0 +1,9 @@
+#!/bin/bash
+cd ..
+find "$(pwd)/$(basename $PWD)" -maxdepth 1 -name "*.html" -type f -exec bash -c '
+  for file do
+    if [ ! -e "$(basename $file)" ] || [ "$file" -nt "$(basename $file)" ]; then
+      cp -v "$file" .
+    fi
+  done
+' bash {} +
